@@ -103,7 +103,20 @@ if(WITH_PAPI)
 	set(LINK_FLAGS ${LINK_FLAGS} ${PAPI_LDFLAGS_OTHER})
 endif()
 
+set(SETP_DIRS "")
 foreach(STEP IN LISTS STEPS)
 	message(STATUS ">>> Configuring Step${STEP} <<<")
 	add_subdirectory("Step${STEP}")
+	set(SETP_DIRS "${SETP_DIRS} ${CMAKE_CURRENT_SOURCE_DIR}/Step${STEP}")
 endforeach()
+string(STRIP "${SETP_DIRS}" SETP_DIRS)
+
+#
+# Pack
+#
+
+set(LOGIN "xharmi00")
+add_custom_target(pack COMMAND
+	zip -r "${LOGIN}.zip"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ANN-${LOGIN}.txt"
+	"${SETP_DIRS}")
