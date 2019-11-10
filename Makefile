@@ -5,6 +5,8 @@ BUILD_DIR := $(ROOT_DIR)/build
 DATA_DIR := $(ROOT_DIR)/Data
 SCRIPTS_DIR := $(ROOT_DIR)/Scripts
 
+MODULES := intel PAPI HDF5 CMake Python/3.6.1
+
 BUILD_TYPE := Release
 WITH_PAPI := 0
 STEPS := '0'
@@ -12,8 +14,6 @@ STEPS := '0'
 STEP := 0
 BIG_DATA := 0
 PAPI_EVENTS := ''
-
-MODULES := intel PAPI HDF5 CMake Python/3.6.1
 
 PACK := xharmi00
 STEP_DRIS := Step0

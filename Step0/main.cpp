@@ -8,7 +8,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <stdio.h>
+#include <cstdio>
 #include <hdf5.h>
 
 // PAPI is used for trivial measurements but has impact on optimalisation

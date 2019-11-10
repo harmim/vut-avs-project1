@@ -5,6 +5,8 @@
  */
 
 
+#include <cmath>
+
 #include "neuron.h"
 
 
@@ -17,7 +19,14 @@ float evalNeuron(
 	size_t neuronId
 )
 {
-	// TODO: Step0 - Fill in the implementation, all the required arguments are
-	// passed. If you don't use them all you are doing something wrong!
-	return .0f;
+	float x = bias;
+
+	for (size_t i = 0; i < inputSize; i++)
+	{
+		x +=
+			input[neuronCount * neuronId + i] *
+			weights[neuronCount * i + neuronId];
+	}
+
+	return fmaxf(0f, x);
 }
