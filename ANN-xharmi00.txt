@@ -12,17 +12,17 @@ https://www.fit.vutbr.cz/~ibordovsky/avs/datasets/bigRefOutput.h5.
 
 Krok 0: základní implementace
 ===================================
-Celkový čas [s]:
-Výkon skalárních operací [MFLOPS]:      ??
-Výkon vektorových operací [MFLOPS]:     ??
-L1 miss [%]:                            ??
-L2 miss [%]:                            ??
-L3 miss [%]:                            ??
+Celkový čas [s]: 194.114
+Výkon skalárních operací [MFLOPS]:      36.4579
+Výkon vektorových operací [MFLOPS]:     1132.37
+L1 miss [%]:                            86
+L2 miss [%]:                            99.9
+L3 miss [%]:                            0.00729
 
 Které PAPI_EVENTS jste použili pro získání počtu výpadků v paměti?
-HW countery pro L1:
-HW countery pro L2:
-HW countery pro L3:
+HW countery pro L1: PAPI_L1_DCM, PAPI_LD_INS, PAPI_SR_INS
+HW countery pro L2: PAPI_L2_DCM, PAPI_L2_DCA
+HW countery pro L3: PAPI_L3_TCM, PAPI_L3_TCA
 
 
 Krok 1: vektorizace funkcí
