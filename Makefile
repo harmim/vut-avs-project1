@@ -24,8 +24,8 @@ build:
 	ml $(MODULES) && \
 		mkdir -p $(BUILD_DIR) && \
 		cd $(BUILD_DIR) && \
-		cmake $(ROOT_DIR) -DCMAKE_BUILD_TYPE=$(BUILD_TYPE) \
-			-DWITH_PAPI=$(WITH_PAPI) -DSTEPS=$(STEPS) && \
+		cmake $(ROOT_DIR) -DCMAKE_BUILD_TYPE='$(BUILD_TYPE)' \
+			-DWITH_PAPI=$(WITH_PAPI) -DSTEPS='$(STEPS)' && \
 		make -j
 
 
@@ -33,12 +33,12 @@ build:
 run:
 ifeq ($(BIG_DATA), 0)
 	ml $(MODULES) && \
-		PAPI_EVENTS=$(PAPI_EVENTS) && \
+		PAPI_EVENTS='$(PAPI_EVENTS)' && \
 		$(BUILD_DIR)/Step$(STEP)/ANN $(DATA_DIR)/network.h5 \
 			$(DATA_DIR)/testData.h5 $(BUILD_DIR)/Step$(STEP)/output.h5
 else
 	ml $(MODULES) && \
-		PAPI_EVENTS=$(PAPI_EVENTS) && \
+		PAPI_EVENTS='$(PAPI_EVENTS)' && \
 		$(BUILD_DIR)/Step$(STEP)/ANN $(DATA_DIR)/network.h5 \
 			$(DATA_DIR)/bigDataset.h5 $(BUILD_DIR)/Step$(STEP)/output.h5
 endif
