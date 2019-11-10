@@ -3,6 +3,7 @@ SHELL := /bin/bash
 ROOT_DIR := $(shell pwd)
 BUILD_DIR := $(ROOT_DIR)/build
 DATA_DIR := $(ROOT_DIR)/Data
+SCRIPTS_DIR := $(ROOT_DIR)/Scripts
 
 BUILD_TYPE := Release
 WITH_PAPI := 0
@@ -40,6 +41,19 @@ else
 		PAPI_EVENTS=$(PAPI_EVENTS) && \
 		$(BUILD_DIR)/Step$(STEP)/ANN $(DATA_DIR)/network.h5 \
 			$(DATA_DIR)/bigDataset.h5 $(BUILD_DIR)/Step$(STEP)/output.h5
+endif
+
+
+.PHONY: compare
+compare:
+ifeq ($(BIG_DATA), 0)
+	ml $(MODULES) && \
+		python3 $(SCRIPTS_DIR)/compareOutputs.py \
+			$(BUILD_DIR)/Step$(STEP)/output.h5 $(DATA_DIR)/testRefOutput.h5
+else
+	ml $(MODULES) && \
+		python3 $(SCRIPTS_DIR)/compareOutputs.py \
+			$(BUILD_DIR)/Step$(STEP)/output.h5 $(DATA_DIR)/bigRefOutput.h5
 endif
 
 

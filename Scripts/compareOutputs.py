@@ -4,7 +4,6 @@
 import sys
 import h5py
 import numpy as np
-import matplotlib.pyplot as plt
 
 if len(sys.argv) != 3:
     print("Expected two arguments. Output and reference output file.")
