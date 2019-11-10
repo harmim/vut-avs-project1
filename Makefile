@@ -47,7 +47,7 @@ ifeq ($(BIG_DATA), 0)
 			$(BUILD)/Step$(STEP)/output.h5
 else
 	ml $(MODULES) && \
-		PAPI_EVENTS='$(EVENTS)' && \
+		PAPI_EVENTS='$(EVENTS)' \
 		$(BUILD)/Step$(STEP)/ANN $(DATA)/network.h5 $(DATA)/bigDataset.h5 \
 			$(BUILD)/Step$(STEP)/output.h5
 endif
