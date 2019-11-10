@@ -15,7 +15,7 @@
 /**
  * @brief Returns output of the neuron as product of inputs, sums and bias.
  *
- * @param inputSize   - number of inputs the neuron
+ * @param inputSize   - number of inputs of the neuron
  * @param neuronCount - number of neurons in the layer
  * @param input       - pointer to neuron input array (identical for all
  *                      neurons in the layer)

@@ -16,22 +16,18 @@
  * @brief Returns output of the neuron as product of inputs, sums and bias.
  *
  * @param inputSize   - number of inputs of the neuron
- * @param neuronCount - number of neurons in the layer
  * @param input       - pointer to neuron input array (identical for all
  *                      neurons in the layer)
- * @param weights     - pointer to weights for all neurons in the layer
+ * @param weights     - pointer to weights for the neuron
  * @param bias        - bias value of the neuron
- * @param neuronId    - ID of the neuron in layer (position)
  * @return Output of the neuron.
  */
-#pragma omp declare simd uniform(inputSize, neuronCount, input, weight) linear(neuronId:1) simdlen(8)
+// #pragma omp declare simd uniform(inputSize, input, weight) simdlen(8)
 float evalNeuron(
 	size_t inputSize,
-	size_t neuronCount,
 	const float *input,
 	const float *weight,
-	float bias,
-	size_t neuronId
+	float bias
 );
 
 
