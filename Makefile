@@ -1,19 +1,28 @@
 SHELL := /bin/bash
 
-ROOT_DIR := $(shell pwd)
-BUILD_DIR := $(ROOT_DIR)/build
-DATA_DIR := $(ROOT_DIR)/Data
-SCRIPTS_DIR := $(ROOT_DIR)/Scripts
+ROOT := $(shell pwd)
+BUILD := $(ROOT)/build
+DATA := $(ROOT)/Data
+SCRIPTS := $(ROOT)/Scripts
 
 MODULES := intel PAPI HDF5 CMake Python/3.6.1
 
+BIG_DATA := 0
+
 BUILD_TYPE := Release
-WITH_PAPI := 0
-STEPS := '0'
+PAPI := 0
+STEPS := 0
 
 STEP := 0
-BIG_DATA := 0
-PAPI_EVENTS := ''
+FLOPS := 0
+CACHES := 0
+ifneq ($(FLOPS), 0)
+	EVENTS := PAPI_FP_OPS|PAPI_SP_OPS
+else ifneq ($(CACHES), 0)
+	EVENTS := PAPI_L1_DCM|PAPI_LD_INS|PAPI_SR_INS|PAPI_L2_DCM|PAPI_L2_DCA|PAPI_L3_TCM|PAPI_L3_TCA
+else
+	EVENTS :=
+endif
 
 PACK := xharmi00
 STEP_DRIS := Step0
@@ -22,10 +31,10 @@ STEP_DRIS := Step0
 .PHONY: build
 build:
 	ml $(MODULES) && \
-		mkdir -p $(BUILD_DIR) && \
-		cd $(BUILD_DIR) && \
-		cmake $(ROOT_DIR) -DCMAKE_BUILD_TYPE='$(BUILD_TYPE)' \
-			-DWITH_PAPI=$(WITH_PAPI) -DSTEPS='$(STEPS)' && \
+		mkdir -p $(BUILD) && \
+		cd $(BUILD) && \
+		cmake $(ROOT) -DCMAKE_BUILD_TYPE='$(BUILD_TYPE)' -DWITH_PAPI=$(PAPI) \
+			-DSTEPS='$(STEPS)' && \
 		make -j
 
 
@@ -33,14 +42,14 @@ build:
 run:
 ifeq ($(BIG_DATA), 0)
 	ml $(MODULES) && \
-		PAPI_EVENTS='$(PAPI_EVENTS)' && \
-		$(BUILD_DIR)/Step$(STEP)/ANN $(DATA_DIR)/network.h5 \
-			$(DATA_DIR)/testData.h5 $(BUILD_DIR)/Step$(STEP)/output.h5
+		PAPI_EVENTS='$(EVENTS)' \
+		$(BUILD)/Step$(STEP)/ANN $(DATA)/network.h5 $(DATA)/testData.h5 \
+			$(BUILD)/Step$(STEP)/output.h5
 else
 	ml $(MODULES) && \
-		PAPI_EVENTS='$(PAPI_EVENTS)' && \
-		$(BUILD_DIR)/Step$(STEP)/ANN $(DATA_DIR)/network.h5 \
-			$(DATA_DIR)/bigDataset.h5 $(BUILD_DIR)/Step$(STEP)/output.h5
+		PAPI_EVENTS='$(EVENTS)' && \
+		$(BUILD)/Step$(STEP)/ANN $(DATA)/network.h5 $(DATA)/bigDataset.h5 \
+			$(BUILD)/Step$(STEP)/output.h5
 endif
 
 
@@ -48,12 +57,12 @@ endif
 compare:
 ifeq ($(BIG_DATA), 0)
 	ml $(MODULES) && \
-		python3 $(SCRIPTS_DIR)/compareOutputs.py \
-			$(BUILD_DIR)/Step$(STEP)/output.h5 $(DATA_DIR)/testRefOutput.h5
+		python3 $(SCRIPTS)/compareOutputs.py $(BUILD)/Step$(STEP)/output.h5 \
+			$(DATA)/testRefOutput.h5
 else
 	ml $(MODULES) && \
-		python3 $(SCRIPTS_DIR)/compareOutputs.py \
-			$(BUILD_DIR)/Step$(STEP)/output.h5 $(DATA_DIR)/bigRefOutput.h5
+		python3 $(SCRIPTS)/compareOutputs.py $(BUILD)/Step$(STEP)/output.h5 \
+			$(DATA)/bigRefOutput.h5
 endif
 
 
