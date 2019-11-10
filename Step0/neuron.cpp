@@ -23,10 +23,8 @@ float evalNeuron(
 
 	for (size_t i = 0; i < inputSize; i++)
 	{
-		x +=
-			input[neuronCount * neuronId + i] *
-			weights[neuronCount * i + neuronId];
+		x += input[i] * weights[neuronCount * i + neuronId];
 	}
 
-	return fmaxf(0f, x);
+	return fmaxf(.0f, x);
 }
