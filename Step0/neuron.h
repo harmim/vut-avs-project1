@@ -5,6 +5,10 @@
  */
 
 
+#ifndef NEURON_H
+#define NEURON_H
+
+
 #include <cstdlib>
 
 
@@ -28,3 +32,6 @@ float evalNeuron(
 	float bias,
 	size_t neuronId
 );
+
+
+#endif
