@@ -24,7 +24,7 @@
  * @param neuronId    - ID of the neuron in layer (position)
  * @return Output of the neuron.
  */
-#pragma omp declare simd uniform(inputSize, neuronCount, input, weight) linear(neuronId:1)
+#pragma omp declare simd uniform(inputSize, neuronCount, input, weight) linear(neuronId:1) notinbranch simdlen(8)
 float evalNeuron(
 	size_t inputSize,
 	size_t neuronCount,
