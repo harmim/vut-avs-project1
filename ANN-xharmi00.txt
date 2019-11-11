@@ -42,7 +42,7 @@ v souboru 'neuron.h' '#pragma omp declare simd' s patřičnými dovětky.
 Které dovětky k pragmám jste použili a jaký měly vliv na kompilátorem
 generované funkce? (main.cpp.optrpt/neuron.cpp.optrpt)
 - U '#pragma omp declare simd' jsem použil dovětky 'simdlen(8)',
-linear(neuronId:1) a uniform(inputSize, neuronCount, input, weight). Tyto
+linear(neuronId:1) a uniform(inputSize, neuronCount, input, weights). Tyto
 dovětky měly pozitivní vliv na výkon. Cena s vektorizací se snižuje
 a potenciální zrychlení se zvyšuje.
 
@@ -51,7 +51,7 @@ Krok 2: přístupy do paměti
 ===================================
 a) S dovětky
 (Sepište všechny použité dovětky): uniform(inputSize, input),
-linear(weight:784), linear(weight:512)
+linear(weights:784), linear(weights:512)
 
 Celkový čas [s]:                        36.5162
 Výkon skalárních operací [MFLOPS]:      0.38841
@@ -63,7 +63,7 @@ L3 miss [%]:                            0.0538
 b) Bez dovětků
 Některé dovětky mají negativní dopad na výkon, přestože kompilátor tvrdí opak.
 Které?
-- uniform(inputSize, input), linear(weight:784), linear(weight:512)
+- uniform(inputSize, input), linear(weights:784), linear(weights:512)
 
 Celkový čas [s]:                        22.8715
 Výkon skalárních operací [MFLOPS]:      176.393
