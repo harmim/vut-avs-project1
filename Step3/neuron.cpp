@@ -19,7 +19,7 @@ float evalNeuron(
 {
 	float x = bias;
 
-	#pragma omp simd
+	#pragma omp simd reduction(+:x)
 	for (size_t i = 0; i < inputSize; i++)
 	{
 		x += input[i] * weights[i];
