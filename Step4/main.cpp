@@ -69,8 +69,7 @@ void transpose2D(float *&data, const size_t dimX, const size_t dimY);
  */
 float *allocateMemory(size_t numberOfElements)
 {
-	// TODO: Step4 - modify allocation.
-	return (float *) malloc(numberOfElements * sizeof(float));
+	return (float *) aligned_alloc(64, numberOfElements * sizeof(float));
 }
 
 
