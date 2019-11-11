@@ -10,6 +10,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cmath>
+#include <malloc.h>
 #include <hdf5.h>
 
 // PAPI is used for trivial measurements but has impact on optimalisation
@@ -69,7 +70,7 @@ void transpose2D(float *&data, const size_t dimX, const size_t dimY);
  */
 float *allocateMemory(size_t numberOfElements)
 {
-	return (float *) aligned_alloc(64, numberOfElements * sizeof(float));
+	return (float *) memalign(64, numberOfElements * sizeof(float));
 }
 
 
