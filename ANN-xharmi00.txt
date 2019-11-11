@@ -50,26 +50,27 @@ a potenciální zrychlení se zvyšuje.
 Krok 2: přístupy do paměti
 ===================================
 a) S dovětky
-(Sepište všechny použité dovětky):
+(Sepište všechny použité dovětky): uniform(inputSize, input),
+linear(weight:784), linear(weight:512)
 
-Celkový čas [s]:                        ??
-Výkon skalárních operací [MFLOPS]:      ??
-Výkon vektorových operací [MFLOPS]:     ??
-L1 miss [%]:                            ??
-L2 miss [%]:                            ??
-L3 miss [%]:                            ??
+Celkový čas [s]:                        36.5162
+Výkon skalárních operací [MFLOPS]:      0.38841
+Výkon vektorových operací [MFLOPS]:     5881.65
+L1 miss [%]:                            5.08
+L2 miss [%]:                            14.1
+L3 miss [%]:                            0.0538
 
 b) Bez dovětků
 Některé dovětky mají negativní dopad na výkon, přestože kompilátor tvrdí opak.
 Které?
--
+- uniform(inputSize, input), linear(weight:784), linear(weight:512)
 
-Celkový čas [s]:                        ??
-Výkon skalárních operací [MFLOPS]:      ??
-Výkon vektorových operací [MFLOPS]:     ??
-L1 miss [%]:                            ??
-L2 miss [%]:                            ??
-L3 miss [%]:                            ??
+Celkový čas [s]:                        22.8715
+Výkon skalárních operací [MFLOPS]:      176.393
+Výkon vektorových operací [MFLOPS]:     14728.2
+L1 miss [%]:                            15.6
+L2 miss [%]:                            53.1
+L3 miss [%]:                            0.00547
 
 Proč mají dovětky negativní efekt na výkon?
 (neklasifikovaná odpověď, můžete vynechat, ale může vynést přiklonění k bodu

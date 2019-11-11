@@ -22,7 +22,8 @@
  * @param bias        - bias value of the neuron
  * @return Output of the neuron.
  */
-// #pragma omp declare simd uniform(inputSize, input, weight) simdlen(8)
+// #pragma omp declare simd uniform(inputSize, input) linear(weight:784)
+// #pragma omp declare simd uniform(inputSize, input) linear(weight:512)
 float evalNeuron(
 	size_t inputSize,
 	const float *input,
