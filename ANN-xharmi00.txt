@@ -107,12 +107,13 @@ přibližně stejný.
 
 Krok 4: režie funkcí, zarovnání paměti
 ===================================
-Celkový čas [s]:                        ??
-Výkon skalárních operací [MFLOPS]:      ??
-Výkon vektorových operací [MFLOPS]:     ??
-L1 miss [%]:                            ??
-L2 miss [%]:                            ??
-L3 miss [%]:                            ??
+Celkový čas [s]:                        20.0745
+Výkon skalárních operací [MFLOPS]:      24.6947
+Výkon vektorových operací [MFLOPS]:     15873.3
+L1 miss [%]:                            24
+L2 miss [%]:                            60
+L3 miss [%]:                            0.155
 
 Proč není zrychlení již výrazné? Na jaké typy problémů cílí tyto optimalizace?
--
+- Zrychlení pravděpodobně není již tak vázrané, protože program není tak
+složitý a kompilátor tyto optimalizace provádí nějakým způsobem automaticky.
