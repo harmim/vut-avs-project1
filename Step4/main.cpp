@@ -17,7 +17,6 @@
 #ifdef WITH_PAPI
 #include "papi_cntr.h"
 #endif
-#include "neuron.h"
 
 
 /**
