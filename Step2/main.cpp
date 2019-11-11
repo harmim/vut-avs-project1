@@ -186,9 +186,9 @@ int main(int argc, char *argv[])
 	papi_routines["network"].Start();
 #endif
 
-	transpose2D(weight1, imagePixels, layerSize);
+	transpose2D(weight1, layerSize, imagePixels);
 	transpose2D(weight2, layerSize, layerSize);
-	transpose2D(weight3, layerSize, outputSize);
+	transpose2D(weight3, outputSize, layerSize);
 
 	for (size_t i = 0; i < imageCount; i++)
 	{
@@ -337,7 +337,7 @@ void evaluateLayer(
 	for (size_t i = 0; i < neuronCount; i++)
 	{
 		output[i] = evalNeuron(
-			inputSize, input, weight[neuronCount * i], bias[i]
+			inputSize, input, weight + inputSize * i, bias[i]
 		);
 	}
 }
