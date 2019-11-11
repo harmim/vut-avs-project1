@@ -80,15 +80,15 @@ u věcí, které jsou na hraně :-))
 
 Krok 3.1: přesun #pragma omp simd
 ===================================
-Celkový čas [s]:                        ??
-Výkon skalárních operací [MFLOPS]:      ??
-Výkon vektorových operací [MFLOPS]:     ??
-L1 miss [%]:                            ??
-L2 miss [%]:                            ??
-L3 miss [%]:                            ??
+Celkový čas [s]:                        22.8687
+Výkon skalárních operací [MFLOPS]:      175.902
+Výkon vektorových operací [MFLOPS]:     14703.3
+L1 miss [%]:                            15.6
+L2 miss [%]:                            52.8
+L3 miss [%]:                            0.0674
 
 Jaký dovětek je potřeba přidat?
--
+- reduction(+:x)
 
 Krok 3.2: vykonání po vrstvách místo po obrázcích
 ===================================
