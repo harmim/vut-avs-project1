@@ -25,7 +25,7 @@ else
 endif
 
 PACK := xharmi00
-STEP_DRIS := Step0 Step1 Step2 Step3
+STEP_DRIS := Step0 Step1 Step2 Step3 Step4
 
 
 .PHONY: build

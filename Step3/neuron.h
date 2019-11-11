@@ -25,7 +25,7 @@
 float evalNeuron(
 	size_t inputSize,
 	const float *input,
-	const float *weight,
+	const float *weights,
 	float bias
 );
 

@@ -28,7 +28,7 @@ float evalNeuron(
 	size_t inputSize,
 	size_t neuronCount,
 	const float *input,
-	const float *weight,
+	const float *weights,
 	float bias,
 	size_t neuronId
 );
