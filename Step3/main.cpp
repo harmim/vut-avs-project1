@@ -69,7 +69,7 @@ void transpose2D(float *&data, const size_t dimX, const size_t dimY);
  */
 float *allocateMemory(size_t numberOfElements)
 {
-	// TODO: Step3 - modify allocation.
+	// TODO: Step4 - modify allocation.
 	return (float *) malloc(numberOfElements * sizeof(float));
 }
 
@@ -175,11 +175,10 @@ int main(int argc, char *argv[])
 //                     !!! Do not edit main() above !!!                       //
 //############################################################################//
 
-	// Memory for the outputs from each layer. First two are reused for each
-	// input picture. The last output holds the classification results of all
-	// input pictures.
-	float *output1 = allocateMemory(layerSize);
-	float *output2 = allocateMemory(layerSize);
+	// Memory for the outputs from each layer. All outputs hold the
+	// classification results of all input pictures.
+	float *output1 = allocateMemory(imageCount * layerSize);
+	float *output2 = allocateMemory(imageCount * layerSize);
 	float *output3 = allocateMemory(imageCount * outputSize);
 
 #ifdef WITH_PAPI
@@ -196,21 +195,36 @@ int main(int argc, char *argv[])
 		evaluateLayer(
 			imagePixels,
 			layerSize,
-			&input[i * imagePixels],
+			input + i * imagePixels,
 			weight1,
 			bias1,
-			output1
+			output1 + i * layerSize
 		);
+	}
+
+	for (size_t i = 0; i < imageCount; i++)
+	{
 		// The second layer 512 -> 512.
-		evaluateLayer(layerSize, layerSize, output1, weight2, bias2, output2);
+		evaluateLayer(
+			layerSize,
+			layerSize,
+			output1 + i * layerSize,
+			weight2,
+			bias2,
+			output2 + i * layerSize
+		);
+	}
+
+	for (size_t i = 0; i < imageCount; i++)
+	{
 		// The third layer 512 -> 10.
 		evaluateLayer(
 			layerSize,
 			outputSize,
-			output2,
+			output2 + i * layerSize,
 			weight3,
 			bias3,
-			&output3[i * outputSize]
+			output3 + i * outputSize
 		);
 	}
 
